@@ -81,24 +81,6 @@
             </video>
           </div>
         </div>
-<!--        <div class="img-grid">-->
-<!--          <van-grid v-if="showType === 'img'" :column-num="3">-->
-<!--            <van-grid-item-->
-<!--              class="img-grid-item"-->
-<!--              v-for="(src, index) in images"-->
-<!--              :key="index"-->
-<!--              @click="handleImagePreview(index)"-->
-<!--            >-->
-<!--              <van-image class="image" :src="src" fit="cover"/>-->
-<!--            </van-grid-item>-->
-<!--          </van-grid>-->
-<!--          <div v-else-if="showType === 'vedio'" class="vedioBox">-->
-<!--            <video width="320" height="200" controls>-->
-<!--              <source :src="images" type="video/*">-->
-<!--              您的浏览器不支持Video标签。-->
-<!--            </video>-->
-<!--          </div>-->
-<!--        </div>-->
         <div class="container">
 
           <van-divider dashed></van-divider>
@@ -211,43 +193,43 @@
             </div>
           </template>
 
-          <template v-if="bxdInfo.s1">
-            <van-divider dashed></van-divider>
-            <div class="container-item">
-              <div class="container-item-left">审核员1：</div>
-              <div class="container-item-right">{{ bxdInfo.s1.xm }}</div>
-            </div>
-            <div class="container-item">
-              <div class="container-item-left">工号：</div>
-              <div class="container-item-right">{{ bxdInfo.s1.gh }}</div>
-            </div>
-            <div class="container-item">
-              <div class="container-item-left">审核状态：</div>
-              <div class="container-item-right">
-                <van-tag v-if="bxdInfo.s1.tag" :type="bxdInfo.s1.tag" size="medium">{{ bxdInfo.s1.zt }}</van-tag>
-                <van-tag v-else size="medium">{{ bxdInfo.s1.zt }}</van-tag>
-              </div>
-            </div>
-          </template>
+<!--          <template v-if="bxdInfo.s1">-->
+<!--            <van-divider dashed></van-divider>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">审核员1：</div>-->
+<!--              <div class="container-item-right">{{ bxdInfo.s1.xm }}</div>-->
+<!--            </div>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">工号：</div>-->
+<!--              <div class="container-item-right">{{ bxdInfo.s1.gh }}</div>-->
+<!--            </div>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">审核状态：</div>-->
+<!--              <div class="container-item-right">-->
+<!--                <van-tag v-if="bxdInfo.s1.tag" :type="bxdInfo.s1.tag" size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
+<!--                <van-tag v-else size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </template>-->
 
-          <template v-if="bxdInfo.s2">
-            <van-divider dashed></van-divider>
-            <div class="container-item">
-              <div class="container-item-left">审核员2：</div>
-              <div class="container-item-right">{{ bxdInfo.s2.xm }}</div>
-            </div>
-            <div class="container-item">
-              <div class="container-item-left">工号：</div>
-              <div class="container-item-right">{{ bxdInfo.s2.gh }}</div>
-            </div>
-            <div class="container-item">
-              <div class="container-item-left">审核状态：</div>
-              <div class="container-item-right">
-                <van-tag v-if="bxdInfo.s2.tag" :type="bxdInfo.s2.tag" size="medium">{{ bxdInfo.s2.zt }}</van-tag>
-                <van-tag v-else size="medium">{{ bxdInfo.s2.zt }}</van-tag>
-              </div>
-            </div>
-          </template>
+<!--          <template v-if="bxdInfo.s2">-->
+<!--            <van-divider dashed></van-divider>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">审核员2：</div>-->
+<!--              <div class="container-item-right">{{ bxdInfo.s2.xm }}</div>-->
+<!--            </div>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">工号：</div>-->
+<!--              <div class="container-item-right">{{ bxdInfo.s2.gh }}</div>-->
+<!--            </div>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">审核状态：</div>-->
+<!--              <div class="container-item-right">-->
+<!--                <van-tag v-if="bxdInfo.s2.tag" :type="bxdInfo.s2.tag" size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
+<!--                <van-tag v-else size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </template>-->
 
         </div>
         <div class="button">
@@ -316,7 +298,7 @@
           <van-stepper v-model="gs" :min="0" step="0.1" input-width="150px" button-size="38px"/>
         </div>
         <div class="button" v-if="hc.length > 0">
-          <van-button class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
+          <van-button v-if = "completeHc"class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
           <van-button class="button-cancle" size="large" @click="cancleHc">取消</van-button>
         </div>
       </div>
@@ -357,6 +339,7 @@
     components: {noDataShow},
     data() {
       return {
+        completeHc:true,
         fghc:[],//返工耗材
         completeBtn:false,
         video: false,
@@ -559,17 +542,17 @@
         // 评价
         bxdInfo.pj = Number(bxdInfo.pj)
 
-        // 审核员审核状态
-        if (bxdInfo.s1) {
-          let s1 = getBxdShState(bxdInfo.shy1state)
-          bxdInfo.s1.zt = s1.text
-          bxdInfo.s1.tag = s1.tag
-        }
-        if (bxdInfo.s2) {
-          let s2 = getBxdShState(bxdInfo.shy2state)
-          bxdInfo.s2.zt = s2.text
-          bxdInfo.s2.tag = s2.tag
-        }
+        // // 审核员审核状态
+        // if (bxdInfo.s1) {
+        //   let s1 = getBxdShState(bxdInfo.shy1state)
+        //   bxdInfo.s1.zt = s1.text
+        //   bxdInfo.s1.tag = s1.tag
+        // }
+        // if (bxdInfo.s2) {
+        //   let s2 = getBxdShState(bxdInfo.shy2state)
+        //   bxdInfo.s2.zt = s2.text
+        //   bxdInfo.s2.tag = s2.tag
+        // }
 
         // 报修单状态，0未派单，1已派单，2已维修，3撤销单
         bxdInfo.state = Number(bxdInfo.state)
@@ -908,6 +891,11 @@
           return v.id + '-' + v.sl
         })
         hc = hc.join('|')
+        this.completeHc = false;
+        this.$toast({
+          message: '正在提交',
+          duration: 1500
+        })
         JdrServlet({
           op: 'upbxdbyjdr', // 调用方法，固定值*
           jid: this.authInfo.ybid, // 易班id*
