@@ -191,43 +191,43 @@
             </div>
           </template>
 
-<!--          <template v-if="bxdInfo.s1">-->
-<!--            <van-divider dashed></van-divider>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">审核员1：</div>-->
-<!--              <div class="container-item-right">{{ bxdInfo.s1.xm }}</div>-->
-<!--            </div>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">工号：</div>-->
-<!--              <div class="container-item-right">{{ bxdInfo.s1.gh }}</div>-->
-<!--            </div>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">审核状态：</div>-->
-<!--              <div class="container-item-right">-->
-<!--                <van-tag v-if="bxdInfo.s1.tag" :type="bxdInfo.s1.tag" size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
-<!--                <van-tag v-else size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </template>-->
+          <!--<template v-if="bxdInfo.s1">-->
+            <!--<van-divider dashed></van-divider>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">审核员1：</div>-->
+              <!--<div class="container-item-right">{{ bxdInfo.s1.xm }}</div>-->
+            <!--</div>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">工号：</div>-->
+              <!--<div class="container-item-right">{{ bxdInfo.s1.gh }}</div>-->
+            <!--</div>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">审核状态：</div>-->
+              <!--<div class="container-item-right">-->
+                <!--<van-tag v-if="bxdInfo.s1.tag" :type="bxdInfo.s1.tag" size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
+                <!--<van-tag v-else size="medium">{{ bxdInfo.s1.zt }}</van-tag>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</template>-->
 
-<!--          <template v-if="bxdInfo.s2">-->
-<!--            <van-divider dashed></van-divider>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">审核员2：</div>-->
-<!--              <div class="container-item-right">{{ bxdInfo.s2.xm }}</div>-->
-<!--            </div>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">工号：</div>-->
-<!--              <div class="container-item-right">{{ bxdInfo.s2.gh }}</div>-->
-<!--            </div>-->
-<!--            <div class="container-item">-->
-<!--              <div class="container-item-left">审核状态：</div>-->
-<!--              <div class="container-item-right">-->
-<!--                <van-tag v-if="bxdInfo.s2.tag" :type="bxdInfo.s2.tag" size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
-<!--                <van-tag v-else size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </template>-->
+          <!--<template v-if="bxdInfo.s2">-->
+            <!--<van-divider dashed></van-divider>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">审核员2：</div>-->
+              <!--<div class="container-item-right">{{ bxdInfo.s2.xm }}</div>-->
+            <!--</div>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">工号：</div>-->
+              <!--<div class="container-item-right">{{ bxdInfo.s2.gh }}</div>-->
+            <!--</div>-->
+            <!--<div class="container-item">-->
+              <!--<div class="container-item-left">审核状态：</div>-->
+              <!--<div class="container-item-right">-->
+                <!--<van-tag v-if="bxdInfo.s2.tag" :type="bxdInfo.s2.tag" size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
+                <!--<van-tag v-else size="medium">{{ bxdInfo.s2.zt }}</van-tag>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</template>-->
         </div>
         <div class="button">
           <template v-if="eid != null & bxdshystate & hcAndGsState">
@@ -305,7 +305,7 @@
         </div>
         <div class="title">工时：</div>
         <div class="desc" style="text-align: center;">
-          <van-stepper v-model="gs" :min="0" step="0.1" input-width="150px" button-size="38px"/>
+          <van-stepper v-model="gs" :min="0" step="0.01" input-width="150px" button-size="38px"/>
         </div>
         <div class="button" v-if="hc.length > 0">
           <van-button class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
@@ -481,7 +481,7 @@
               (this.bxdInfo.shy1state === 0)
               :
               (this.bxdInfo.shy2state === 0) || stateParam
-            this.hcAndGsState = this.bxdInfo.hc.length == 0 && this.bxdInfo.gs == '' ? false : true;
+            this.hcAndGsState = this.bxdInfo.hc.length == 0 && this.bxdInfo.gs.length == 0 ? false : true;
             if (this.bxdInfo.hc){
               //耗材数据处理
               let str = this.bxdInfo.hc;
