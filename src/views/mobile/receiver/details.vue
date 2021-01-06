@@ -295,10 +295,10 @@
         </div>
         <div class="title">工时：</div>
         <div class="desc" style="text-align: center;">
-          <van-stepper v-model="gs" :min="0" step="0.1" input-width="150px" button-size="38px"/>
+          <van-stepper v-model="gs" :min="0" step="0.01" input-width="150px" button-size="38px"/>
         </div>
         <div class="button" v-if="hc.length > 0">
-          <van-button v-if = "completeHc"class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
+          <van-button v-if = "completeHc" class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
           <van-button class="button-cancle" size="large" @click="cancleHc">取消</van-button>
         </div>
       </div>
