@@ -16,7 +16,7 @@
       let query = this.$route.query
       let mock = true;
       if (mock) {
-        let sf = 3
+        let sf = 2
         // 身份信息：1学生，2接单人，3审核员
         switch (sf) {
           case 1:
@@ -26,30 +26,30 @@
               head: 'http://img02.fs.yiban.cn/5000209/avatar/user/200',
               sf: 1,
               ybid: 12494620,
-              eid: 9
+              eid: 10
             }
             break
           case 2:
             query = {
-              xm: '兰荣坛',
-              xh: '17287281',
+              xm: '中核 张岩',
+              xh: '212016505',
               sf: 2,
-              ybid: 12537536,
-              eid: 9
+              ybid: 41790787,
+              eid: 10
             }
             break
           case 3:
             query = {
-              xm: '陈海风',
-              xh: '1788987667',
-              sf: 3,
-              ybid: 11907978,
-              eid: 9
-              // xm: '高天博',
-              // xh: '1788987876', //gh
+              // xm: '徐仰月',
+              // xh: '212012503',
               // sf: 3,
-              // ybid: '12423778', //ybid
-              // eid: 9
+              // ybid: 38714856,
+              // eid: 10
+              xm: '马良',
+              xh: '212014505', //gh
+              sf: 3,
+              ybid: '41820927', //ybid
+              eid: 10
             }
             break
         }
