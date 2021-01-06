@@ -481,7 +481,7 @@
               (this.bxdInfo.shy1state === 0)
               :
               (this.bxdInfo.shy2state === 0) || stateParam
-            this.hcAndGsState = this.bxdInfo.hc.length == 0 && this.bxdInfo.gs == '' ? false : true;
+            this.hcAndGsState = this.bxdInfo.hc.length == 0 && this.bxdInfo.gs.length == 0 ? false : true;
             if (this.bxdInfo.hc){
               //耗材数据处理
               let str = this.bxdInfo.hc;
