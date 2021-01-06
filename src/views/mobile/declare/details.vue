@@ -156,48 +156,48 @@
               <div class="container-item-left">邮箱：</div>
               <div class="container-item-right">{{ bxdInfo.j.yx }}</div>
             </div>
-            <div class="container-item">
-              <div class="container-item-left">耗材：</div>
-              <div class="container-item-right gs">
-                <van-cell-group>
-                  <van-cell
-                    class="my-van-cell"
-                    v-for="item in hc"
-                    :key="item.id"
-                    :title="item.mc">
-                    <template #extra>
-                      <span class="my-tag orange-txt">{{item.sl}}</span>
-                      <span class="unit orange-txt">{{item.dw}}</span>
-                    </template>
-                  </van-cell>
-                </van-cell-group>
-              </div>
-            </div>
-            <div v-if="fghc.length >0" class="container-item">
-              <div  class="container-item-left">返工耗材：</div>
-              <div class="container-item-right gs">
-                <van-cell-group>
-                  <van-cell
-                    class="my-van-cell"
-                    v-for="item in fghc"
-                    :key="item.id"
-                    :title="item.mc">
-                    <template #extra>
-                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>
-                      <span class="my-tag orange-txt">{{item.sl}}</span>
-                      <span class="unit orange-txt">{{item.dw}}</span>
-                    </template>
-                  </van-cell>
-                </van-cell-group>
-              </div>
-            </div>
-            <div class="container-item">
-              <div class="container-item-left">工时：</div>
-              <div class="container-item-right orange-txt">
-                <span v-if="hc">{{bxdInfo.gs}} </span>
-                <span v-else>--</span>
-              </div>
-            </div>
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">耗材：</div>-->
+<!--              <div class="container-item-right gs">-->
+<!--                <van-cell-group>-->
+<!--                  <van-cell-->
+<!--                    class="my-van-cell"-->
+<!--                    v-for="item in hc"-->
+<!--                    :key="item.id"-->
+<!--                    :title="item.mc">-->
+<!--                    <template #extra>-->
+<!--                      <span class="my-tag orange-txt">{{item.sl}}</span>-->
+<!--                      <span class="unit orange-txt">{{item.dw}}</span>-->
+<!--                    </template>-->
+<!--                  </van-cell>-->
+<!--                </van-cell-group>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div v-if="fghc.length >0" class="container-item">-->
+<!--              <div  class="container-item-left">返工耗材：</div>-->
+<!--              <div class="container-item-right gs">-->
+<!--                <van-cell-group>-->
+<!--                  <van-cell-->
+<!--                    class="my-van-cell"-->
+<!--                    v-for="item in fghc"-->
+<!--                    :key="item.id"-->
+<!--                    :title="item.mc">-->
+<!--                    <template #extra>-->
+<!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
+<!--                      <span class="my-tag orange-txt">{{item.sl}}</span>-->
+<!--                      <span class="unit orange-txt">{{item.dw}}</span>-->
+<!--                    </template>-->
+<!--                  </van-cell>-->
+<!--                </van-cell-group>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="container-item">-->
+<!--              <div class="container-item-left">工时：</div>-->
+<!--              <div class="container-item-right orange-txt">-->
+<!--                <span v-if="hc">{{bxdInfo.gs}} </span>-->
+<!--                <span v-else>&#45;&#45;</span>-->
+<!--              </div>-->
+<!--            </div>-->
           </template>
 
           <template v-if="bxdInfo.s1">
