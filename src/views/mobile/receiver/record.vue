@@ -8,8 +8,15 @@
       <div class="student-id">工号：{{ authInfo.xh }}</div>
       <div class="gs">
         <div class="gs-text">剩余工时：</div>
-        <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((2 - gs) / 2) * 100" :color="customColors" :format="formatGs"></el-progress>
-        <van-button v-if="presta" class="button-item btn-ckywxdd" type="primary" size="small" round @click.prevent="myHistorydd()">维修历史</van-button>
+        <div class="gs-progress">
+          <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((2 - gs) / 2) * 100" :color="customColors" :format="formatGs"></el-progress>
+        </div>
+      </div>
+      <div class="wysb">
+        <van-button class="button-item" type="primary" size="normal" round @click.prevent="toMyDeclare()">我要申报</van-button>
+      </div>
+      <div class="wxls">
+        <van-button v-if="presta" class="button-item " type="primary" size="normal" round @click.prevent="myHistorydd()">维修历史</van-button>
       </div>
     </div>
     <div class="main-header">
@@ -126,6 +133,7 @@
   import { JdrServlet } from '@/api/JdrServlet'
   import { sortBxd } from '@/utils/common'
   import { mapGetters } from 'vuex'
+  import { setAuthInfo } from '@/utils/cookie'
 
   export default {
     name: 'ReceiverRecord', // 接单人的工单记录
@@ -246,6 +254,23 @@
       next()
     },
     methods: {
+      /**
+       * 转换身份，进行申报
+       * */
+      toMyDeclare(){
+        this.authInfo.sf = 1;
+        //改变当前身份状态，存入cookie
+        setAuthInfo(this.authInfo)
+        if (this.authInfo.eid) {
+          // 跳转至正在申报列中的列表页面
+          let recordPath = config.declareEidRecordPath.replace(':id', '')
+          this.$router.push(recordPath + this.authInfo.eid)
+        } else {
+          // 跳转申报记录页面
+          let recordPath = config.declareRecordPath.replace(':id', '')
+          this.$router.push(recordPath + this.authInfo.xh)
+        }
+      },
       /*查询已维修的订单*/
       myHistorydd() {
         this.sta = false;
@@ -456,18 +481,36 @@
         opacity: 0.5;
       }
 
-      /deep/.gs {
+      .wysb{
+         position: absolute;
+         top: 45px;
+         right: 160px;
+         width: 140px;
+       }
+      .wxls{
         position: absolute;
-        top: 38px;
+        top: 45px;
         right: 10px;
-        width: 160px;
+        width: 140px;
+      }
+      .gs {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 280px;
 
         .gs-text{
           font-size: 20px;
-          margin: 8px 0;
+          display: inline-block;
         }
-        .el-progress__text {
-          font-size: 22px !important;
+        .gs-progress{
+          position: absolute;
+          right: 10px;
+          width: 160px;
+          display: inline-block;
+          .el-progress__text {
+            font-size: 22px !important;
+          }
         }
       }
     }
