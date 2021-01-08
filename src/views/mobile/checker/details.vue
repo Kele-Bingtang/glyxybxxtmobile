@@ -157,6 +157,7 @@
                     :key="item.id"
                     :title="item.mc">
                     <template #extra>
+                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
