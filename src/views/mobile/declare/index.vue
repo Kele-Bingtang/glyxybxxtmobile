@@ -399,7 +399,9 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            this.submitBxdParams.tp = JSON.stringify(this.submitBxdParams.tp)
+            if (typeof this.submitBxdParams.tp !== "string"){
+              this.submitBxdParams.tp = JSON.stringify(this.submitBxdParams.tp)
+            }
             delete this.submitBxdParams.yydesc
             if (this.tempVideoFile !== ''){
               this.UploadVideoToFur()
