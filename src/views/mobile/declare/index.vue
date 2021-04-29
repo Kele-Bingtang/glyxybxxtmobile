@@ -444,7 +444,7 @@
         console.log(this.submitBxdParams)
 
         if (this.submitBxdParams.jid !== '' && this.submitBxdParams.bid !== '') {
-          BxdServlet(this.submitBxdParams).then(() => {
+          BxdServlet(this.submitBxdParams).then((res) => {
             this.loading = false
             this.$toast({
               message: '申请返工已提交',
@@ -453,6 +453,9 @@
               onClose: async () => {
                 this.resetForm('ruleForm')
                 await this.fetchData(this.submitBxdParams.sbrxh)
+                if(res.info == "wjdr"){
+                  alert("系统已为您生成报修单！但是当前没有可以接单的接单人了！请尽快电话联系后勤处为您安排接单人！");
+                }
                 this.$router.push(`${this.recordPath}${this.submitBxdParams.sbrxh}`)
               }
             })
@@ -466,7 +469,7 @@
             })
           });
         } else {
-          BxdServlet(this.submitBxdParams).then(() => {
+          BxdServlet(this.submitBxdParams).then((res) => {
             this.loading = false;
             this.$toast({
               message: '申报已提交',
@@ -475,6 +478,9 @@
               onClose: async () => {
                 this.resetForm('ruleForm')
                 await this.fetchData(this.submitBxdParams.sbrxh)
+                if(res.info == "wjdr"){
+                  alert("系统已为您生成报修单！但是当前没有可以接单的接单人了！请尽快电话联系后勤处为您安排接单人！");
+                }
                 this.$router.push(`${this.recordPath}${this.submitBxdParams.sbrxh}`)
               }
             })
