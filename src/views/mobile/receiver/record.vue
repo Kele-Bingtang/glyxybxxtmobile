@@ -9,7 +9,7 @@
       <div class="gs">
         <div class="gs-text">剩余工时：</div>
         <div class="gs-progress">
-          <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((2 - gs) / 2) * 100" :color="customColors" :format="formatGs"></el-progress>
+          <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((12 - gs) / 12) * 100" :color="customColors" :format="formatGs"></el-progress>
         </div>
       </div>
       <div class="wysb">
@@ -295,17 +295,18 @@
       getGs() {
         JdrServlet({
           op: 'selgs',
-          jid: this.authInfo.ybid
+          // jid: this.authInfo.ybid,
+          ybid: this.authInfo.ybid,
         }).then(res => {
-            this.gs = res.obj.gs
-          if (this.gs >2){
-            this.gs = 2
+            this.gs = res.obj.gs;
+          if (this.gs >12){
+            this.gs = 12
           }
         })
       },
       formatGs() {
         let multiplier = 100
-        let gs = (2 * multiplier - this.gs * multiplier) / 100 // ×100 防止精度丢失
+        let gs = (12 * multiplier - this.gs * multiplier) / 100 // ×100 防止精度丢失
         return `${gs}`;
       },
       /**
@@ -500,7 +501,7 @@
         width: 280px;
 
         .gs-text{
-          font-size: 20px;
+          font-size: 18px;
           display: inline-block;
         }
         .gs-progress{
@@ -509,7 +510,7 @@
           width: 160px;
           display: inline-block;
           .el-progress__text {
-            font-size: 22px !important;
+            font-size: 18px !important;
           }
         }
       }
