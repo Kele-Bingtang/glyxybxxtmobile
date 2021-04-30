@@ -185,7 +185,7 @@
               </div>
             </div>
             <div class="container-item">
-              <div class="container-item-left">工时：</div>
+              <div class="container-item-left">工时(小时)：</div>
               <div class="container-item-right orange-txt">
                 <span v-if="hc">{{bxdInfo.gs}} </span>
                 <span v-else>--</span>
@@ -293,9 +293,9 @@
             <van-button  class="button-add" type="primary" size="large" plain round @click.prevent="showHcList">点击添加耗材</van-button>
           </div>
         </div>
-        <div class="title">工时：</div>
+        <div class="title">工时(小时)：</div>
         <div class="desc" style="text-align: center;">
-          <van-stepper v-model="gs" :min="0" step="0.01" input-width="150px" button-size="38px"/>
+          <van-stepper v-model="gs" min="0" max="12" step="0.1" input-width="150px" button-size="38px"/>
         </div>
         <div class="button" v-if="hc.length > 0">
           <van-button v-if = "completeHc" class="button-submit" type="primary" size="large" @click="completeHcList">确定</van-button>
@@ -1247,7 +1247,7 @@
           margin-bottom: 40px;
 
           &-left {
-            width: 180px;
+            width: 190px;
             font-size: 32px;
             font-family: PingFang SC;
             font-weight: 800;
