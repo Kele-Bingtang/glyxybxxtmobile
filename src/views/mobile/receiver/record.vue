@@ -6,17 +6,17 @@
       </div>
       <div class="name">姓名：{{ authInfo.xm }}</div>
       <div class="student-id">工号：{{ authInfo.xh }}</div>
-      <div class="gs">
-        <div class="gs-text">剩余工时：</div>
-        <div class="gs-progress">
-          <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((12 - gs) / 12) * 100" :color="customColors" :format="formatGs"></el-progress>
-        </div>
-      </div>
       <div class="wysb">
         <van-button class="button-item" type="primary" size="normal" round @click.prevent="toMyDeclare()">我要申报</van-button>
       </div>
       <div class="wxls">
         <van-button v-if="presta" class="button-item " type="primary" size="normal" round @click.prevent="myHistorydd()">维修历史</van-button>
+      </div>
+      <div class="gs">
+        <div class="gs-text">剩余工时(小时)：</div>
+        <div class="gs-progress">
+          <el-progress v-if="gs || gs == 0" :text-inside="false" :stroke-width="12" :percentage="((12 - gs) / 12) * 100" :color="customColors" :format="formatGs"></el-progress>
+        </div>
       </div>
     </div>
     <div class="main-header">
@@ -440,9 +440,9 @@
 
     &-user {
       width: 750px;
-      height: 152px;
+      height: 180px;
       background-color: #fff; // #F4F6F8;
-      font-family: PingFang SC;
+      font-family: "PingFang SC" ,"Microsoft YaHei";
       box-sizing: border-box;
       position: sticky;
       top: -3px;
@@ -467,7 +467,7 @@
         font-size: 28px;
         font-weight: 500;
         line-height: 44px;
-        color: rgba(74, 88, 96, 1);
+        color: #606266;
       }
 
       .student-id {
@@ -478,40 +478,42 @@
         font-size: 28px;
         font-weight: 400;
         line-height: 36px;
-        color: rgba(74, 88, 96, 1);
-        opacity: 0.5;
+        color: #606266;
       }
 
       .wysb{
          position: absolute;
-         top: 45px;
+         top: 30px;
          right: 160px;
          width: 140px;
        }
       .wxls{
         position: absolute;
-        top: 45px;
+        top: 30px;
         right: 10px;
         width: 140px;
       }
       .gs {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 280px;
+        top: 120px;
+        left: 156px;
+        width: 550px;
+        font-size: 28px;
+        line-height: 44px;
+        color:#606266;
+        display: flex;
+        align-items: center;
 
         .gs-text{
-          font-size: 18px;
-          display: inline-block;
+
         }
         .gs-progress{
-          position: absolute;
-          right: 10px;
-          width: 160px;
-          display: inline-block;
-          .el-progress__text {
-            font-size: 18px !important;
-          }
+          /*position: absolute;*/
+          /*right: 10px;*/
+          width: 260px;
+          /*.el-progress__text {*/
+          /*  color:#a5acb0 !important;*/
+          /*}*/
         }
       }
     }
@@ -533,8 +535,8 @@
         width: 256px;
         height: 90px;
         float: left;
-        font-size: 52px;
-        font-family: PingFang SC;
+        font-size: 48px;
+        font-family:  "PingFang SC" ,"Microsoft YaHei";
         font-weight: bold;
         line-height: 90px;
         color: rgba(74, 88, 96, 1);
@@ -554,7 +556,7 @@
         height: 44px;
         float: right;
         font-size: 32px;
-        font-family: PingFang SC;
+        font-family:  "PingFang SC" ,"Microsoft YaHei";
         font-weight: 400;
         line-height: 44px;
         color: rgba(16, 175, 90, 1);
@@ -584,7 +586,7 @@
           width: 320px;
           height: 36px;
           font-size: 26px;
-          font-family: PingFang SC;
+          font-family:  "PingFang SC" ,"Microsoft YaHei";
           font-weight: 400;
           line-height: 36px;
           color: rgba(255, 255, 255, 1);
@@ -599,7 +601,7 @@
           width: auto;
           height: 36px;
           font-size: 26px;
-          font-family: PingFang SC;
+          font-family:  "PingFang SC" ,"Microsoft YaHei";
           font-weight: 400;
           line-height: 36px;
           color: rgba(255, 255, 255, 1);
@@ -613,7 +615,7 @@
           width: 570px;
           height: 50px;
           font-size: 34px;
-          font-family: PingFang SC;
+          font-family:  "PingFang SC" ,"Microsoft YaHei";
           font-weight: bold;
           line-height: 50px;
           color: rgba(255, 255, 255, 1);
@@ -644,7 +646,7 @@
           width: 400px;
           height: 40px;
           font-size: 28px;
-          font-family: PingFang SC;
+          font-family:  "PingFang SC" ,"Microsoft YaHei";
           font-weight: 400;
           line-height: 40px;
           color: rgba(255, 239, 156, 1);
