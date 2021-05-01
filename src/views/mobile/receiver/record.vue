@@ -483,13 +483,13 @@
 
       .wysb{
          position: absolute;
-         top: 45px;
+         top: 30px;
          right: 160px;
          width: 140px;
        }
       .wxls{
         position: absolute;
-        top: 45px;
+        top: 30px;
         right: 10px;
         width: 140px;
       }
@@ -497,7 +497,7 @@
         position: absolute;
         top: 120px;
         left: 156px;
-        width: 400px;
+        width: 550px;
         font-size: 28px;
         line-height: 44px;
         color:#606266;
@@ -510,7 +510,7 @@
         .gs-progress{
           /*position: absolute;*/
           /*right: 10px;*/
-          width: 180px;
+          width: 260px;
           /*.el-progress__text {*/
           /*  color:#a5acb0 !important;*/
           /*}*/
