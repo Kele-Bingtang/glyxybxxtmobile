@@ -128,7 +128,7 @@
 
         <el-form-item class="submit-form-item">
           <van-button type="primary" round size="large" :loading="loading" loading-text="提交中"
-                      @click.prevent="submitForm('ruleForm')">{{submitText}}
+                      @click.prevent="submitForm('ruleForm')" v-prevent-re-click>{{submitText}}
           </van-button>
         </el-form-item>
         <el-form-item class="reset-form-item">
@@ -180,14 +180,18 @@
 </template>
 
 <script>
+  import Vue from "vue";
   import {BxdServlet} from '@/api/BxdServlet'
   import {DictListServlet} from '@/api/Dict'
-  import {VideoUpload, DeleteVideo} from "../../../api/VideoUpload";
+  import {VideoUpload, DeleteVideo} from "../../../api/VideoUpload"
   import config from '@/config'
   import compress from '@/utils/image-compress'
   import {mapGetters} from 'vuex'
   import {getAuthInfo, getEid} from '../../../utils/cookie'
-  import {filterParams} from "../../../utils/common";
+  import {filterParams} from "../../../utils/common"
+  import { preventReClick } from "../../../utils/plugins";
+
+  Vue.use(preventReClick);
 
   export default {
     name: 'Declare',
