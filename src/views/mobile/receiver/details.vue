@@ -156,9 +156,11 @@
                     class="my-van-cell"
                     v-for="item in hc"
                     :key="item.id"
-                    :title="item.mc">
+                    >
+<!--                    :title="item.mc"-->
                     <template #extra>
 <!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
+                      <span class="hcname orange-txt" @click="showHcFullName(item.mc)">{{item.mc}}</span>
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -174,9 +176,11 @@
                     class="my-van-cell"
                     v-for="item in fghc"
                     :key="item.id"
-                    :title="item.mc">
+               >
+<!--                    :title="item.mc"-->
                     <template #extra>
 <!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
+                      <span class="hcname orange-txt" @click="showHcFullName(item.mc)">{{item.mc}}</span>
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -298,7 +302,7 @@
               <div class="hc-name">
                 {{item.mc}}
               </div>
-              <van-stepper class="hc-sl" v-model="item.sl" :min="0" input-width="50px" button-size="26px" />
+              <van-stepper class="hc-sl" v-model="item.sl" :min="0" :decimal-length="4" input-width="50px" button-size="26px" />
               <div class="hc-dw">{{item.dw}}</div>
               <van-icon class="hc-del" :name="icons + 'icon_delete_s@2x.png'" @click="removeHc(item.id)" />
             </div>
@@ -522,6 +526,13 @@
       this.getBxdDetails()
     },
     methods: {
+      // 显示耗材名字全称
+      showHcFullName(name){
+        this.$toast({
+          message: name,
+          duration: 1500
+        })
+      },
       /**
        * 获取耗材级联选择数据
        */
@@ -541,8 +552,6 @@
           yjlb: first,
           ejlb: second
         }).then(res => {
-          console.log('==========================')
-          console.log(res)
           if (res.obj){
             // 返回第三级耗材
             // this.hclist = res.obj;
@@ -557,13 +566,10 @@
                 xh: item.xh
               }
             })
-            console.log('----------');
-            console.log(this.hclist)
           } else {
             this.$notify({ type: 'warning', message: '数据异常', duration: 1000 })
           }
         }).catch(err => {
-          console.log(err)
           this.$notify({ type: 'error', message: '接口异常或网络中断', duration: 1000 })
         })
       },
@@ -1441,6 +1447,16 @@
               padding: 10px 0;
               font-size: 30px;
 
+              .hcname{
+                width: 250px;
+                height: 44px;
+                line-height: 44px;
+                text-align: center;
+                font-size: 32px;
+                overflow: hidden;/*超出部分隐藏*/
+                white-space: nowrap;/*不换行*/
+                text-overflow:ellipsis;/*超出部分文字以...显示*/
+              }
               .hcxh{
                 height: 44px;
                 line-height: 44px;
@@ -1449,7 +1465,7 @@
               }
               .my-tag {
                 display: inline-block;
-                width: 44px;
+                max-width: 95px;
                 height: 44px;
                 line-height: 44px;
                 text-align: center;
@@ -1458,8 +1474,10 @@
             }
 
             .unit {
-              font-size: 28px;
+              font-size: 32px;
               margin-left: 5px;
+              height: 44px;
+              line-height: 44px;
             }
 
             .tel {
