@@ -158,7 +158,7 @@
                     :key="item.id"
                     :title="item.mc">
                     <template #extra>
-                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>
+<!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -176,7 +176,7 @@
                     :key="item.id"
                     :title="item.mc">
                     <template #extra>
-                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>
+<!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -267,6 +267,18 @@
     <!--填写耗材和工时-->
     <van-dialog v-model="hcDialog" :show-confirm-button="false" :showCancelButton="hc.length === 0" width="94%" @cancel="cancleHc">
       <div class="hc-dialog" slot="default">
+        <div class="title">耗材类别：</div>
+        <div class="desc">
+          <el-cascader
+            class="cascader-hclb"
+            placeholder="选择耗材类别"
+            :props="{ expandTrigger: 'hover' }"
+            @change="hclbOptionChange"
+            :options="hclbOptions"
+            filterable
+            clearable
+          ></el-cascader>
+        </div>
         <div class="title">耗材：</div>
         <div class="desc">
           <!-- <van-field
@@ -305,7 +317,6 @@
     </van-dialog>
 
     <!-- add 20200901 -->
-
     <!--耗材列表上拉菜单-->
     <van-action-sheet
       v-model="showHcListActionSheet"
@@ -339,6 +350,101 @@
     components: {noDataShow},
     data() {
       return {
+        hclbOptions: [{
+          value: '1',
+          label: '安装 ',
+          children: [{
+            value: '1',
+            label: '电气设备安装工程-通用'
+          }, {
+            value: '2',
+            label: '电气设备安装工程-明装'
+          }, {
+            value: '3',
+            label: '电气设备安装工程-暗装'
+          }, {
+            value: '4',
+            label: '给排水、燃气工程'
+          }]
+        },{
+          value: '2',
+          label: '安装拆除 ',
+          children: [{
+            value: '1',
+            label: '变配电及低压电器拆除'
+          }, {
+            value: '2',
+            label: '给排水、燃气工程拆除'
+          }, {
+            value: '3',
+            label: '消防工程拆除'
+          }]
+        },{
+          value: '3',
+          label: '拆除 ',
+          children: [{
+            value: '1',
+            label: '人工拆除工程'
+          }, {
+            value: '2',
+            label: '机械拆除工程'
+          }]},{
+          value: '4',
+          label: '建筑',
+          children: [{
+            value: '1',
+            label: '土（石）方工程'
+          }, {
+            value: '2',
+            label: '砌筑工程'
+          }, {
+            value: '3',
+            label: '屋面及防水工程'
+          }, {
+            value: '4',
+            label: '保温、隔热、防腐工程'
+          }, {
+            value: '5',
+            label: '垃圾外运'
+          }, {
+            value: '6',
+            label: '脚手架工程'
+          }, {
+            value: '7',
+            label: '混凝土模板及支架(撑)'
+          }, {
+            value: '8',
+            label: '特殊项目及机械台班'
+          }]
+        },{
+          value: '5',
+          label: '市政',
+          children: [{
+            value: '1',
+            label: '市政'
+          }, {
+            value: '2',
+            label: '楼地面工程'
+          }, {
+            value: '3',
+            label: '墙、柱面工程'
+          }, {
+            value: '4',
+            label: '天棚工程'
+          }, {
+            value: '5',
+            label: '油漆、涂料、裱糊工程'
+          }, {
+            value: '6',
+            label: '其他装饰工程'
+          }, {
+            value: '7',
+            label: '门窗工程'
+          }, {
+            value: '8',
+            label: '玻璃价格调差'
+          }]
+        }],
         completeHc:true,
         fghc:[],//返工耗材
         completeBtn:false,
@@ -370,6 +476,8 @@
         hcDialog: false, // 耗材弹框
         hc: [], // 耗材
         gs: '', // 工时
+        first:'',//耗材第一级
+        second:'',//耗材第二级
         hclist: [],  // 耗材接口列表
         showHcListActionSheet: false // 耗材列表上拉菜单
       }
@@ -410,10 +518,55 @@
         this.$router.push('/no-permission')
         return
       }
-      await this.getHc()
+      await this.getHc();
       this.getBxdDetails()
     },
     methods: {
+      /**
+       * 获取耗材级联选择数据
+       */
+      hclbOptionChange(currentVal){
+        if (currentVal.length !== 0){
+          this.first = currentVal[0];
+          this.second = currentVal[1];
+          this.getHcOptions(this.first,this.second);
+        }
+      },
+      /**
+       * 获取耗材级联选择数据第三级
+       */
+      async getHcOptions(first,second) {
+        await HcServlet({
+          op: 'selHcByLb',
+          yjlb: first,
+          ejlb: second
+        }).then(res => {
+          console.log('==========================')
+          console.log(res)
+          if (res.obj){
+            // 返回第三级耗材
+            // this.hclist = res.obj;
+            this.hclist = res.obj.map(item => {
+              return {
+                id: item.id,
+                jg: item.jg,
+                mc: item.mc,
+                name: item.mc,
+                dw: item.dw,
+                lb: item.lb,
+                xh: item.xh
+              }
+            })
+            console.log('----------');
+            console.log(this.hclist)
+          } else {
+            this.$notify({ type: 'warning', message: '数据异常', duration: 1000 })
+          }
+        }).catch(err => {
+          console.log(err)
+          this.$notify({ type: 'error', message: '接口异常或网络中断', duration: 1000 })
+        })
+      },
       /**
        * 获取耗材列表
        */
@@ -498,6 +651,9 @@
             if (this.bxdInfo.shy1state == '1' && this.bxdInfo.shy2state == '1'){
               this.completeBtn = true;
             }
+            console.log('-=================')
+            console.log(this.bxdInfo)
+            // this.getHc();
             this.resetBxdInfo()
           }
         }).catch(err => {
@@ -536,6 +692,7 @@
 
         // 提取报修耗材
         this.formatHc(this.bxdInfo.hc)
+
         // 提取工时
         this.gs = this.bxdInfo.gs
 
@@ -687,6 +844,10 @@
        */
       formatHc(hc) {
         hc = copyObj(hc)
+        console.log('============')
+        console.log(this.bxdInfo.hc)
+        console.log(hc)
+        console.log(this.hclist)
         if (this.hclist.length > 0) {
           let hcArr = hc.split('|') // 1-5  6-20
           this.hc = hcArr.map(v => {
@@ -697,7 +858,8 @@
               mc: hcItem.mc,
               sl: item[1],
               dw: hcItem.dw,
-              xh: hcItem.xh
+              lb: hcItem.lb,
+              xh: hcItem.xh,
             }
           })
         }
@@ -706,45 +868,45 @@
        * 选择耗材和工时之后，点击确定
        * 已废弃，20200902
        */
-      completeHc() {
-        this.hc = this.hc.replace(/(^\s*)|(\s*$)/g, '')
-        if (!this.hc) {
-          this.showPopupTip('请填写耗材明细')
-          return
-        }
-        JdrServlet({
-          op: 'upbxdbyjdr', // 调用方法，固定值*
-          jid: this.authInfo.ybid, // 易班id*
-          bid: this.bxdInfo.id, // 报修单id*
-          hc: this.hc,	// 所需耗材使用情况
-          gs: this.gs // 所需工时
-        }).then(res => {
-          this.hcDialog = false // 隐藏弹框
-          if (res.status === 'success') {
-            this.$toast({
-              message: '提交成功',
-              icon: this.icons + 'icon_suc@2x.png',
-              duration: 1500,
-              onClose: () => {
-                this.getBxdDetails()
-              }
-            })
-          } else {
-            this.$toast({
-              message: '提交失败',
-              icon: this.icons + 'tip_info@2x.png',
-              duration: 1500
-            })
-          }
-        }).catch(() => {
-          this.hcDialog = false // 隐藏弹框
-          this.$toast({
-            message: '提交失败',
-            icon: this.icons + 'tip_info@2x.png',
-            duration: 1500
-          })
-        })
-      },
+      // completeHc() {
+      //   this.hc = this.hc.replace(/(^\s*)|(\s*$)/g, '')
+      //   if (!this.hc) {
+      //     this.showPopupTip('请填写耗材明细')
+      //     return
+      //   }
+      //   JdrServlet({
+      //     op: 'upbxdbyjdr', // 调用方法，固定值*
+      //     jid: this.authInfo.ybid, // 易班id*
+      //     bid: this.bxdInfo.id, // 报修单id*
+      //     hc: this.hc,	// 所需耗材使用情况
+      //     gs: this.gs // 所需工时
+      //   }).then(res => {
+      //     this.hcDialog = false // 隐藏弹框
+      //     if (res.status === 'success') {
+      //       this.$toast({
+      //         message: '提交成功',
+      //         icon: this.icons + 'icon_suc@2x.png',
+      //         duration: 1500,
+      //         onClose: () => {
+      //           this.getBxdDetails()
+      //         }
+      //       })
+      //     } else {
+      //       this.$toast({
+      //         message: '提交失败',
+      //         icon: this.icons + 'tip_info@2x.png',
+      //         duration: 1500
+      //       })
+      //     }
+      //   }).catch(() => {
+      //     this.hcDialog = false // 隐藏弹框
+      //     this.$toast({
+      //       message: '提交失败',
+      //       icon: this.icons + 'tip_info@2x.png',
+      //       duration: 1500
+      //     })
+      //   })
+      // },
        //点击修改耗材或者添加耗材按钮
        hcDialogShow(){
          //清空显示的耗材列表
@@ -843,9 +1005,18 @@
        * 接口读取耗材列表，显示上拉菜单
        */
       async showHcList() {
-        this.showHcListActionSheet = true
-        if (!this.hclist.length) {
-          await this.getHc()
+        this.showHcListActionSheet = true;
+        console.log('-=-=-=-===========')
+        console.log(this.hclist)
+        if (this.first !== "") {
+          // await this.getHc();
+         this.getHcOptions(this.first,this.second);
+        }else{
+          this.$toast({
+            message: '请选择耗材类别',
+            duration: 1500
+          })
+          this.showHcListActionSheet = false;
         }
       },
       onSelectHc(item) {
@@ -1360,6 +1531,10 @@
         width: 100%;
         margin-bottom: 20px;
 
+        .cascader-hclb{
+          width: 100%;
+        }
+
         &-field {
           background: rgba(244, 246, 248, 1);
           border-radius: 32px;
@@ -1376,7 +1551,10 @@
             position: relative;
             margin-bottom: 12px;
             .hc-name {
-              width: 280px;
+              overflow: hidden;/*超出部分隐藏*/
+              white-space: nowrap;/*不换行*/
+              text-overflow:ellipsis;/*超出部分文字以...显示*/
+              width: 50%;
               font-size: 26px;
               text-align: center;
               height: 52px;
