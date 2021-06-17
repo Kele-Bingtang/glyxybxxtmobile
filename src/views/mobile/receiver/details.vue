@@ -317,7 +317,6 @@
     </van-dialog>
 
     <!-- add 20200901 -->
-
     <!--耗材列表上拉菜单-->
     <van-action-sheet
       v-model="showHcListActionSheet"
