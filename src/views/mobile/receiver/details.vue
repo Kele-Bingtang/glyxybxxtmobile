@@ -354,7 +354,15 @@
     components: {noDataShow},
     data() {
       return {
-        hclbOptions: [{
+        hclbOptions: [
+          {
+            value: '0',
+            label: '无需耗材 ',
+            children: [{
+              value: '0',
+              label: '无需耗材'
+            }]
+          },{
           value: '1',
           label: '安装 ',
           children: [{
@@ -475,7 +483,7 @@
         encryStudentID: encryStudentID, // 学号加密
         encryEmail: encryEmail, // 邮箱加密
         toast: null, // 加载框对象
-
+        img: "",
         // add 20200901
         hcDialog: false, // 耗材弹框
         hc: [], // 耗材
@@ -850,10 +858,6 @@
        */
       formatHc(hc) {
         hc = copyObj(hc)
-        console.log('============')
-        console.log(this.bxdInfo.hc)
-        console.log(hc)
-        console.log(this.hclist)
         if (this.hclist.length > 0) {
           let hcArr = hc.split('|') // 1-5  6-20
           this.hc = hcArr.map(v => {
