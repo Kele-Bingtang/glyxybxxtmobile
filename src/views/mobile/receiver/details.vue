@@ -160,7 +160,7 @@
 <!--                    :title="item.mc"-->
                     <template #extra>
 <!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
-                      <span class="hcname orange-txt" @click="showHcFullName(item.mc)">{{item.mc}}</span>
+                      <span class="hcname orange-txt" >{{item.mc}}</span>
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -180,7 +180,7 @@
 <!--                    :title="item.mc"-->
                     <template #extra>
 <!--                      <span  v-if="item.xh" class="hcxh orange-txt">{{item.xh}}</span>-->
-                      <span class="hcname orange-txt" @click="showHcFullName(item.mc)">{{item.mc}}</span>
+                      <span class="hcname orange-txt">{{item.mc}}</span>
                       <span class="my-tag orange-txt">{{item.sl}}</span>
                       <span class="unit orange-txt">{{item.dw}}</span>
                     </template>
@@ -1448,14 +1448,14 @@
               font-size: 30px;
 
               .hcname{
-                width: 250px;
-                height: 44px;
-                line-height: 44px;
+                width: 260px;
+                /*height: 44px;*/
+                /*line-height: 44px;*/
                 text-align: center;
                 font-size: 32px;
-                overflow: hidden;/*超出部分隐藏*/
-                white-space: nowrap;/*不换行*/
-                text-overflow:ellipsis;/*超出部分文字以...显示*/
+                /*overflow: hidden;!*超出部分隐藏*!*/
+                /*white-space: nowrap;!*不换行*!*/
+                /*text-overflow:ellipsis;!*超出部分文字以...显示*!*/
               }
               .hcxh{
                 height: 44px;
@@ -1465,7 +1465,7 @@
               }
               .my-tag {
                 display: inline-block;
-                max-width: 95px;
+                /*max-width: 95px;*/
                 height: 44px;
                 line-height: 44px;
                 text-align: center;
