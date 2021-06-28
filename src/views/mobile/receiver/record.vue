@@ -282,7 +282,7 @@
         }).then(res => {
           for (let i = 0; i < res.obj.blist.length; i++) {
             // let state = res.obj.blist[i].state;
-            if (res.obj.blist[i].state == 4) {
+            if (res.obj.blist[i].state == 4 || res.obj.blist[i].state == 2) {
               this.jblists.push(res.obj.blist[i])
             }
           }
