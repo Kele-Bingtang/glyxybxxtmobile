@@ -275,11 +275,9 @@
         <div class="desc">
           <el-cascader
             class="cascader-hclb"
-            placeholder="选择耗材类别"
-            :props="{ expandTrigger: 'hover' }"
+            placeholder="请选择耗材类别"
             @change="hclbOptionChange"
             :options="hclbOptions"
-            filterable
             clearable
           ></el-cascader>
         </div>
@@ -927,9 +925,10 @@
        * 取消耗材填写
        */
       cancleHc() {
+        this.hcDialog = false // 隐藏弹框
         this.formatHc(this.bxdInfo.hc)
         this.gs = this.bxdInfo.gs
-        this.hcDialog = false // 隐藏弹框
+
       },
       /**
        * 完成工单
@@ -1016,8 +1015,6 @@
        */
       async showHcList() {
         this.showHcListActionSheet = true;
-        console.log('-=-=-=-===========')
-        console.log(this.hclist)
         if (this.first !== "") {
           // await this.getHc();
          this.getHcOptions(this.first,this.second);
@@ -1558,7 +1555,7 @@
           width: 100%;
         }
 
-        &-field {
+         &-field {
           background: rgba(244, 246, 248, 1);
           border-radius: 32px;
         }
