@@ -446,8 +446,6 @@
           this.submitBxdParams.jid = ''
           this.submitBxdParams.bid = ''
         }
-        console.log("============")
-        console.log(this.submitBxdParams)
 
         if (this.submitBxdParams.jid !== '' && this.submitBxdParams.bid !== '') {
           BxdServlet(this.submitBxdParams).then((res) => {

@@ -6,7 +6,6 @@ export function getxxBxlb(code) {
     "code" : code
   }).then(res => {
     if(res.obj && res.obj.dictitem){
-      console.log(typeof res.obj.dictitem);
       return res.obj.dictitem
     }
   }).catch(err => {

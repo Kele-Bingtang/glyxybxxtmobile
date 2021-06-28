@@ -663,8 +663,6 @@
             if (this.bxdInfo.shy1state == '1' && this.bxdInfo.shy2state == '1'){
               this.completeBtn = true;
             }
-            console.log('-=================')
-            console.log(this.bxdInfo)
             // this.getHc();
             this.resetBxdInfo()
           }
