@@ -1069,6 +1069,7 @@
           return
         }
         let hc = this.hc.map(v => {
+          v.sl = parseFloat(v.sl);
           return v.id + '-' + v.sl
         })
         hc = hc.join('|')
