@@ -1107,6 +1107,13 @@
 </script>
 
 <style lang="scss">
+  //修改vant dialog层级
+  .van-overlay{
+    z-index: 999!important;
+  }
+  .van-dialog{
+    z-index: 1000!important;
+  }
   /*
     is-success: 已进行结束
     is-finish: 正在进行
@@ -1462,7 +1469,8 @@
                 height: 44px;
                 line-height: 44px;
                 text-align: center;
-                font-size: 32px;
+                font-size: 36px;
+                font-weight: 600;
               }
             }
 

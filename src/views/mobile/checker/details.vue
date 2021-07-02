@@ -1282,7 +1282,8 @@
                 height: 44px;
                 line-height: 44px;
                 text-align: center;
-                font-size: 32px;
+                font-size: 36px;
+                font-weight: 600;
               }
             }
 
