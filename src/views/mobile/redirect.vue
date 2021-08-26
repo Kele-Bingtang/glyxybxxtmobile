@@ -2,7 +2,7 @@
 
 <script>
   import config from '@/config'
-  import { setAuthInfo } from '@/utils/cookie'
+  import {setAuthInfo, setEid} from '@/utils/cookie'
   import { auth } from '@/utils/auth'
 
   export default {
@@ -16,7 +16,7 @@
       let query = this.$route.query
       let mock = true;
       if (mock) {
-        let sf = 2
+        let sf = 1
         // 身份信息：1学生，2接单人，3审核员
         switch (sf) {
           case 1:
@@ -63,6 +63,7 @@
         query.head =  query.head || this.headimg
         // 信息保存cookie
         setAuthInfo(query)
+        setEid(query.eid)
         // 判断身份 身份信息：1学生，2工人，3审核员
         let sf = Number(query.sf)
         switch (sf) {

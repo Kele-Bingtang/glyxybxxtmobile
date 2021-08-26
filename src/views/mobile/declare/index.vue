@@ -52,7 +52,7 @@
           ></el-cascader>
         </el-form-item>
         <el-form-item label="报修内容" prop="bxnr">
-          <el-input v-model="submitBxdParams.bxnr" type="textarea" :rows="3" placeholder="填写报修详细内容"></el-input>
+          <el-input v-model="submitBxdParams.bxnr" type="textarea" :rows="3" placeholder="填写报修详细内容(如：桌子脚断了)"></el-input>
         </el-form-item>
         <el-form-item label="预约维修" prop="yydesc">
 
@@ -73,8 +73,8 @@
           <el-input v-model="submitBxdParams.xq" readonly suffix-icon="el-icon-caret-bottom" placeholder="选择校区"
                     @focus="handleInputFocus('xq')"></el-input>
         </el-form-item>-->
-        <el-form-item label="详细地址" prop="xxdd">
-          <el-input v-model="submitBxdParams.xxdd" placeholder="填写详细地址"></el-input>
+        <el-form-item label="维修详情" prop="xxdd"><el-tag type="success" v-text="ewmAddress"></el-tag>
+          <el-input v-model="submitBxdParams.xxdd" placeholder="填写具体需要维修的地方(如：左数第二张桌子)"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="sbrsj">
           <el-input v-model="submitBxdParams.sbrsj" type="tel" placeholder="填写本人手机号码"></el-input>
@@ -182,6 +182,7 @@
 <script>
   import Vue from "vue";
   import {BxdServlet} from '@/api/BxdServlet'
+  import {EwmServlet} from '@/api/EwmServlet'
   import {DictListServlet} from '@/api/Dict'
   import {VideoUpload, DeleteVideo} from "../../../api/VideoUpload"
   import config from '@/config'
@@ -207,6 +208,11 @@
           op: 'sbrbxd', // 调用方法，固定值*
           xh: '', // 学号*
           eid: ''	// 扫码查询
+        },
+        // 获得二维码 请求参数
+        ewmParams: {
+          op: 'selEwmById', // 调用方法，固定值*
+          ewmId: 0	// 扫码查询
         },
         // 提交报修单参数
         submitBxdParams: {
@@ -260,7 +266,8 @@
         uploadFiles: [],
         uploadFilesCache: [],
         toast: null,
-        headimg: require('@/assets/head.png')
+        headimg: require('@/assets/head.png'),
+        ewmAddress: ''
       }
     },
     created() {
@@ -298,6 +305,7 @@
       if (rework === 'toRework'){
         this.bxlbSelect = false;
       }
+      this.fetchEwmDetail();
     },
     computed: {
       ...mapGetters(['blist', 'config']),
@@ -352,6 +360,19 @@
           this.$message.error('查询出错')
         })
       },
+      /**
+       * 根据eid获取二维码详细信息
+       */
+      async fetchEwmDetail() {
+        this.ewmParams['ewmId'] = getEid();
+        let params = filterParams(this.ewmParams)
+        await EwmServlet(params).then(response => {
+          this.ewmAddress = response.obj.ewmDetail.xxdd
+        }).catch(() => {
+          this.$message.error('查询出错ewm')
+        })
+      },
+
       switchShow(param) {
         this[`${param}`] = !this[`${param}`]
       },
