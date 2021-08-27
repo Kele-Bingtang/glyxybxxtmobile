@@ -12,6 +12,7 @@
       </div>
       <div class="name">{{ declarerInfo.xm }}</div>
       <div class="student-id">{{ declarerInfo.xh }}</div>
+      <div class="ewmAddress">{{ewmAddress}}</div>
     </div>
     <div class="main-swiper" v-if="swipeBlistLength">
       <van-swipe :autoplay="5000" :show-indicators="false" indicator-color="#fff">
@@ -32,7 +33,8 @@
       </van-swipe>
     </div>
     <div class="main-content">
-      <div class="title">请填写申报信息</div>
+      <div class="title">请填写申报信息
+      </div>
 
       <el-form class="form" ref="ruleForm" :model="submitBxdParams" :rules="rules" label-width="80px"
                label-position="top"
@@ -73,7 +75,7 @@
           <el-input v-model="submitBxdParams.xq" readonly suffix-icon="el-icon-caret-bottom" placeholder="选择校区"
                     @focus="handleInputFocus('xq')"></el-input>
         </el-form-item>-->
-        <el-form-item label="维修详情" prop="xxdd"><el-tag type="success" v-text="ewmAddress"></el-tag>
+        <el-form-item label="维修详情" prop="xxdd">
           <el-input v-model="submitBxdParams.xxdd" placeholder="填写具体需要维修的地方(如：左数第二张桌子)"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="sbrsj">
@@ -955,6 +957,17 @@
         font-size: 30px;
         font-weight: 500;
         line-height: 44px;
+        color: rgba(74, 88, 96, 1);
+      }
+
+      .ewmAddress {
+        height: 44px;
+        position: absolute;
+        top: 30px;
+        left: 420px;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 82px;
         color: rgba(74, 88, 96, 1);
       }
 

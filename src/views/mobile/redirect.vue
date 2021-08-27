@@ -21,8 +21,8 @@
         switch (sf) {
           case 1:
             query = {
-              xm: '王佐鸿',
-              xh: '1700730135',
+              xm: 'xxx',
+              xh: '29182847',
               head: 'http://img02.fs.yiban.cn/5000209/avatar/user/200',
               sf: 1,
               ybid: 12494620,
