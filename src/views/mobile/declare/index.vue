@@ -53,6 +53,9 @@
             clearable
           ></el-cascader>
         </el-form-item>
+        <el-form-item label="报修位置" prop="xxdd">
+          <el-input v-model="submitBxdParams.xxdd" placeholder="填写具体需要维修的地方(如：左数第二张桌子)"></el-input>
+        </el-form-item>
         <el-form-item label="报修内容" prop="bxnr">
           <el-input v-model="submitBxdParams.bxnr" type="textarea" :rows="3" placeholder="填写报修详细内容(如：桌子脚断了)"></el-input>
         </el-form-item>
@@ -75,9 +78,6 @@
           <el-input v-model="submitBxdParams.xq" readonly suffix-icon="el-icon-caret-bottom" placeholder="选择校区"
                     @focus="handleInputFocus('xq')"></el-input>
         </el-form-item>-->
-        <el-form-item label="维修详情" prop="xxdd">
-          <el-input v-model="submitBxdParams.xxdd" placeholder="填写具体需要维修的地方(如：左数第二张桌子)"></el-input>
-        </el-form-item>
         <el-form-item label="手机号码" prop="sbrsj">
           <el-input v-model="submitBxdParams.sbrsj" type="tel" placeholder="填写本人手机号码"></el-input>
         </el-form-item>
@@ -223,7 +223,7 @@
           sbr: '', // 申报人姓名
           sbrsj: '', // 手机号码
           sbrxh: '', // 学号
-          xxdd: '', // 详细地点（二维码地址不等于报修的详细地址）
+          xxdd: '', // 详细地点（二维码地址不等于报修的报修位置）
           yysj: '', // 预约时间，如果是公共区域，则此项无法填写，是否公共区域，查询方法五
           yydesc: '', // 同上，日期 + 描述组合，提交时替换字段为yysj
           bxlb: '', // 报修类别，下拉框
@@ -241,7 +241,7 @@
         detailPath: config.declareDetailsPath,
         icons: config.icons, // 图标路径
         rules: {
-          xxdd: {required: true, message: '请选择详细地址', trigger: 'change'},
+          xxdd: {required: true, message: '请选择报修位置', trigger: 'change'},
           bxlb: {required: true, message: '请选择报修类别', trigger: 'change'},
           bxnr: {required: true, message: '请填写报修内容', trigger: 'change'},
           yydesc: {required: true, message: '请填写预约维修时间', trigger: 'change'},
