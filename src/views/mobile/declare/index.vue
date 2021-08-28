@@ -967,8 +967,8 @@
         //position: relative;
         width: 280px;
         height: 80px;
-        top: 40px;
-        right: 46px;
+        top: 57px;
+        right: 78px;
         font-size: 30px;
         font-weight: 500;
         line-height: 38px;
