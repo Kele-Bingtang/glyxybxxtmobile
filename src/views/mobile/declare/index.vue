@@ -12,7 +12,9 @@
       </div>
       <div class="name">{{ declarerInfo.xm }}</div>
       <div class="student-id">{{ declarerInfo.xh }}</div>
-      <div class="ewmAddress">{{ewmAddress}}</div>
+      <div class="ewmAddress">
+        <span class="ewmAddress-text"> {{ewmAddress}}</span>
+      </div>
     </div>
     <div class="main-swiper" v-if="swipeBlistLength">
       <van-swipe :autoplay="5000" :show-indicators="false" indicator-color="#fff">
@@ -961,14 +963,21 @@
       }
 
       .ewmAddress {
-        height: 44px;
         position: absolute;
-        top: 30px;
-        left: 420px;
+        //position: relative;
+        width: 280px;
+        height: 80px;
+        top: 40px;
+        right: 46px;
         font-size: 30px;
         font-weight: 500;
-        line-height: 82px;
+        line-height: 38px;
         color: rgba(74, 88, 96, 1);
+        &-text {
+          display: flex;
+          justify-content: center;
+          align-content: center;
+        }
       }
 
       .student-id {
