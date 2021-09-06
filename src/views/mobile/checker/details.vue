@@ -120,6 +120,10 @@
             <div class="container-item-right">{{ bxdInfo.qylb }}</div>
           </div>
           <div class="container-item">
+            <div class="container-item-left">报修地点：</div>
+            <div class="container-item-right">{{ bxdInfo.ewmdd }}</div>
+          </div>
+          <div class="container-item">
             <div class="container-item-left">报修位置：</div>
             <div class="container-item-right">{{ bxdInfo.xxdd }}</div>
           </div>
