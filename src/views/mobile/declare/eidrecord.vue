@@ -1,7 +1,7 @@
 <template>
   <div class="main" ref="main">
     <div class="main-header">
-      <div class="title">正在申报中</div>
+      <div class="title">{{ewmDD}}</div>
       <div class="back" @click="toDeclarePath" v-if="authInfo.eid">继续申报</div>
     </div>
     <div class="main-content" ref="main-content">
@@ -33,10 +33,9 @@
 <script>
   import noDataShow from '@/mobile/noDataShow'
   import config from '@/config'
-  import { mapGetters } from 'vuex'
   import { getAuthInfo } from '@/utils/cookie'
-  import { sortBxd } from '@/utils/common'
   import { BxdServlet } from '@/api/BxdServlet'
+  import {EwmServlet} from "@/api/EwmServlet";
 
   export default {
     name: 'DeclareEidRecord',
@@ -45,7 +44,8 @@
       return {
         format: 'YYYY/MM/DD HH:mm',
         scrollTop: 0,
-        blist: []
+        blist: [],
+        ewmDD: ''
       }
     },
     computed: {
@@ -64,6 +64,7 @@
       mainDiv.addEventListener('scroll', () => {
         this.scrollTop = mainDiv.scrollTop
       })
+      this.getEwmLocation()
       this.getBxd()
     },
     activated() {
@@ -78,6 +79,23 @@
       next()
     },
     methods: {
+      /**
+       * 获取二维码的地点
+       */
+      getEwmLocation() {
+        EwmServlet ({
+          op: 'selEwmById',
+          ewmId: this.authInfo.eid
+        }).then(res => {
+          if (res.obj && res.obj.ewmDetail) {
+            this.ewmDD = res.obj.ewmDetail.xxdd;
+          } else {
+            this.$notify({ type: 'warning', message: '数据异常', duration: 1000 })
+          }
+        }).catch(() => {
+          this.$notify({ type: 'error', message: '接口异常', duration: 1000 })
+        })
+      },
       /**
        * 获取正在申报列表
        */
@@ -125,15 +143,15 @@
       z-index: 999;
 
       .title {
-        width: 296px;
+        width: 370px;
         height: 90px;
         float: left;
-        font-size: 52px;
+        font-size: 40px;
         font-family: PingFang SC;
         font-weight: bold;
-        line-height: 90px;
+        line-height: 60px;
         color: rgba(74, 88, 96, 1);
-        margin: 12px 0 10px 48px;
+        margin: 25px 0 10px 48px;
       }
 
       .back {
