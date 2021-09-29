@@ -2,7 +2,9 @@
   <div class="main" ref="main">
     <div class="main-header">
       <div class="title">{{ewmDD}}</div>
-      <div class="back" @click="toDeclarePath" v-if="authInfo.eid">继续申报</div>
+      <div class="back" @click="toDeclarePath" v-if="authInfo.eid"><i class="el-icon-attract
+"></i>
+        继续申报</div>
     </div>
     <div class="main-content" ref="main-content">
       <div v-if="blist.length">

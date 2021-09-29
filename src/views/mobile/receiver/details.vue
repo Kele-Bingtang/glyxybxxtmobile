@@ -365,100 +365,104 @@
               label: '无需耗材'
             }]
           },{
-          value: '1',
-          label: '安装 ',
-          children: [{
             value: '1',
-            label: '电气设备安装工程-通用'
-          }, {
+            label: '安装 ',
+            children: [{
+              value: '1',
+              label: '电气设备安装工程-通用'
+            }, {
+              value: '2',
+              label: '电气设备安装工程-明装'
+            }, {
+              value: '3',
+              label: '电气设备安装工程-暗装'
+            }, {
+              value: '4',
+              label: '给排水、燃气工程'
+            }]
+          },{
             value: '2',
-            label: '电气设备安装工程-明装'
-          }, {
+            label: '安装拆除 ',
+            children: [{
+              value: '1',
+              label: '变配电及低压电器拆除'
+            }, {
+              value: '2',
+              label: '给排水、燃气工程拆除'
+            }, {
+              value: '3',
+              label: '消防工程拆除'
+            }]
+          },{
             value: '3',
-            label: '电气设备安装工程-暗装'
-          }, {
+            label: '拆除 ',
+            children: [{
+              value: '1',
+              label: '人工拆除工程'
+            }, {
+              value: '2',
+              label: '机械拆除工程'
+            }, {
+              value: '3',
+              label: '其他项目'
+            }
+            ]},{
             value: '4',
-            label: '给排水、燃气工程'
-          }]
-        },{
-          value: '2',
-          label: '安装拆除 ',
-          children: [{
-            value: '1',
-            label: '变配电及低压电器拆除'
-          }, {
-            value: '2',
-            label: '给排水、燃气工程拆除'
-          }, {
-            value: '3',
-            label: '消防工程拆除'
-          }]
-        },{
-          value: '3',
-          label: '拆除 ',
-          children: [{
-            value: '1',
-            label: '人工拆除工程'
-          }, {
-            value: '2',
-            label: '机械拆除工程'
-          }]},{
-          value: '4',
-          label: '建筑',
-          children: [{
-            value: '1',
-            label: '土（石）方工程'
-          }, {
-            value: '2',
-            label: '砌筑工程'
-          }, {
-            value: '3',
-            label: '屋面及防水工程'
-          }, {
-            value: '4',
-            label: '保温、隔热、防腐工程'
-          }, {
+            label: '建筑',
+            children: [{
+              value: '1',
+              label: '土（石）方工程'
+            }, {
+              value: '2',
+              label: '砌筑工程'
+            }, {
+              value: '3',
+              label: '屋面及防水工程'
+            }, {
+              value: '4',
+              label: '保温、隔热、防腐工程'
+            }, {
+              value: '5',
+              label: '脚手架工程'
+            }, {
+              value: '6',
+              label: '混凝土模板及支架(撑)'
+            }, {
+              value: '7',
+              label: '其他项目'
+            }, {
+              value: '8',
+              label: '特殊项目及机械台班'
+            }]
+          },{
             value: '5',
-            label: '垃圾外运'
-          }, {
-            value: '6',
-            label: '脚手架工程'
-          }, {
-            value: '7',
-            label: '混凝土模板及支架(撑)'
-          }, {
-            value: '8',
-            label: '特殊项目及机械台班'
-          }]
-        },{
-          value: '5',
-          label: '市政',
-          children: [{
-            value: '1',
-            label: '市政'
-          }, {
-            value: '2',
-            label: '楼地面工程'
-          }, {
-            value: '3',
-            label: '墙、柱面工程'
-          }, {
-            value: '4',
-            label: '天棚工程'
-          }, {
-            value: '5',
-            label: '油漆、涂料、裱糊工程'
-          }, {
-            value: '6',
-            label: '其他装饰工程'
-          }, {
-            value: '7',
-            label: '门窗工程'
-          }, {
-            value: '8',
-            label: '玻璃价格调差'
-          }]
-        }],
+            label: '市政',
+            children: [{
+              value: '1',
+              label: '市政'
+            }, {
+              value: '2',
+              label: '楼地面工程'
+            }, {
+              value: '3',
+              label: '墙、柱面工程'
+            }, {
+              value: '4',
+              label: '天棚工程'
+            }, {
+              value: '5',
+              label: '油漆、涂料、裱糊工程'
+            }, {
+              value: '6',
+              label: '其他装饰工程'
+            }, {
+              value: '7',
+              label: '门窗工程'
+            }, {
+              value: '8',
+              label: '玻璃价格调差'
+            }]
+          }],
         completeHc:true,
         fghc:[],//返工耗材
         completeBtn:false,
